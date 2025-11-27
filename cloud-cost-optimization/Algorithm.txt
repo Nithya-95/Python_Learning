@@ -1,7 +1,9 @@
 import boto3 module - boto3 is a python package, used to intract with AWS API.
 
-case 1: describe snapshots 
-if snapshot doesn't have any volume-id then delete the snapshot
+🧠 Core Logic Implemented
+1️⃣ Describe Snapshots: If a snapshot has no associated volume-id, automatically delete it.
+2️⃣ Describe Volumes: Check if volume_id is attached to any EC2 instance. If not, remove related stale snapshots.
+3️⃣ Orphaned Resources: If snapshots exist without corresponding volumes (e.g., volume deleted after snapshot creation), clean them up.
 
 -------------------------------------------------------------------------------
 example of describe snapshots output:
@@ -28,11 +30,6 @@ example of describe snapshots output:
     }
 ---------------------------------------------------------------------------------------------------------
 
-case 2: describe volumes
-check whether volume_ID has attachment of EC2 instance_ID
-if not delete the EBS snapshot
-
------------------------------------------------------------------------------------------------------------
 example of describe volume output:
   
     $ aws ec2 describe-volumes
@@ -57,5 +54,4 @@ example of describe volume output:
                 "Encrypted": false
             }
 ----------------------------------------------------------------------------------------------------------------------
-case 3:
-if no associated volume present then delete snapshot (maybe volume deleted afer a snapshot created)
+
