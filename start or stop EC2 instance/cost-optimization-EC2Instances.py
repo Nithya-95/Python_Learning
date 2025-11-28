@@ -2,7 +2,7 @@ import boto3
 def lambda_handler(event, context):
     action=event['action']
     ec2 = boto3.client('ec2')
-    response = ec2.describe_instances(Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
+    response = ec2.describe_instances()
     instances = []      
     for Reservation in response['Reservations']:
         for instance in Reservation['Instances']:
